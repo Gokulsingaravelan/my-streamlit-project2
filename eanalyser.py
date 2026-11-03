@@ -7,28 +7,18 @@ import streamlit as st
 from sklearn.ensemble import IsolationForest
 from sklearn.linear_model import LinearRegression
 
-
-# ---------------- PAGE CONFIGURATION ----------------
-
 st.set_page_config(
     page_title="Personal Expense Analyser",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-
-# ---------------- FILE SETTINGS ----------------
-
 FILE = "expenses.csv"
 COLUMNS = ["Date", "Category", "Amount", "Description"]
 
 
 st.title("💰 PERSONAL EXPENSE ANALYSER")
 st.write("Track, Analyse and Predict Your Expenses")
-
-
-# ---------------- LOAD EXPENSES ----------------
 
 def load_expenses():
 
@@ -57,16 +47,9 @@ def load_expenses():
         return df[COLUMNS]
 
     return pd.DataFrame(columns=COLUMNS)
-
-
-# ---------------- SAVE EXPENSES ----------------
-
 def save_expenses(df):
 
     df.to_csv(FILE, index=False)
-
-
-# ---------------- ADD EXPENSE ----------------
 
 def add_expenses():
 
@@ -121,10 +104,6 @@ def add_expenses():
             save_expenses(df)
 
             st.success("Expense added successfully!")
-
-
-# ---------------- VIEW EXPENSES ----------------
-
 def view_expenses():
 
     df = load_expenses()
@@ -143,10 +122,6 @@ def view_expenses():
             df,
             use_container_width=True
         )
-
-
-# ---------------- DELETE EXPENSES ----------------
-
 def delete_expenses():
 
     df = load_expenses()
@@ -180,10 +155,6 @@ def delete_expenses():
         st.success("Expense deleted successfully")
 
         st.rerun()
-
-
-# ---------------- EXPENSE SUMMARY ----------------
-
 def expense_summary():
 
     df = load_expenses()
@@ -232,10 +203,6 @@ def expense_summary():
     st.success(
         f"Highest Spending Category: {highest_category}"
     )
-
-
-# ---------------- VISUALIZE EXPENSES ----------------
-
 def visualize_expenses():
 
     df = load_expenses()
@@ -374,9 +341,6 @@ def budget_analyse():
             min(current_expense / budget, 1.0)
         )
 
-
-# ---------------- PREDICT EXPENSE ----------------
-
 def predict_expense():
 
     df = load_expenses()
@@ -476,8 +440,6 @@ def predict_expense():
         plt.close(fig)
 
 
-# ---------------- UNUSUAL EXPENSE DETECTION ----------------
-
 def detect_unusual_expense():
 
     df = load_expenses()
@@ -521,7 +483,7 @@ def detect_unusual_expense():
             )
 
 
-# ---------------- MAIN PROGRAM ----------------
+
 
 st.sidebar.title("📌 MENU")
 
@@ -541,7 +503,7 @@ choice = st.sidebar.selectbox(
 )
 
 
-# ---------------- DASHBOARD ----------------
+
 
 if choice == "Dashboard":
 
@@ -622,8 +584,6 @@ elif choice == "Detect Unusual Expenses":
 
     detect_unusual_expense()
 
-
-# ---------------- FOOTER ----------------
 
 st.sidebar.markdown("---")
 
